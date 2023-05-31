@@ -6,7 +6,7 @@ from flask import Flask, abort, redirect, request,render_template, session
 from flask_cors import CORS
 import os
 import pickle
-import os
+import os 
 from newspaper import Article
 import urllib
 from google_auth_oauthlib.flow import Flow
