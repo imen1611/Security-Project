@@ -6,7 +6,7 @@ from flask import Flask, abort, redirect, request,render_template, session
 from flask_cors import CORS
 import os
 import pickle
-import os 
+import os
 from newspaper import Article
 import urllib
 from google_auth_oauthlib.flow import Flow
@@ -16,13 +16,13 @@ import google.auth.transport.requests
 
 
 #Loading Flask and assigning the model variable
-app = Flask(__name__)
+app = Flask(_name_)
 CORS(app)
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 app.secret_key = 'spotfraudsecret'
 GOOGLE_CLIENT_ID = "760986431265-2fc7vlhigm545luev27evh2irn3d2cfs.apps.googleusercontent.com"
-client_secret_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+client_secret_file = os.path.join(pathlib.Path(_file_).parent, "client_secret.json")
 
 flow = Flow.from_client_secrets_file(
      client_secrets_file=client_secret_file,
@@ -69,12 +69,10 @@ def logout():
 
 @app.route("/")
 def index():
-     #return "<a href='/login'><button>login</button></a>"
-     # remove this comment, and nahi l "#" lel return bech thot fiha html login
      return render_template('login.html')
 
-
-with open('C:/Users/Calina/Downloads/Fake-news-detection-master/fake/model.pickle', 'rb') as handle:
+#Replace the path with your own path:
+with open('C:/Users/Calina/Downloads/Fake-news-detection-spotfraud/fake/model.pickle', 'rb') as handle:
 	model = pickle.load(handle)
 
 @app.route('/home')
@@ -96,6 +94,6 @@ def predict():
     pred = model.predict([news])
     return render_template('main.html', prediction_text='The news is "{}"'.format(pred[0]))
     
-if __name__=="__main__":
+if _name__=="__main_":
     port=int(os.environ.get('PORT',5000))
     app.run(port=port,debug=True,use_reloader=False)
